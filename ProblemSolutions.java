@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   MARIANO GARCIA MELO / SECTION 001
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -24,6 +24,7 @@ class ProblemSolutions {
      *
      * The solution time complexity must NOT be worse than O(n).
      * For the solution, use a Hash Table.
+
      *
      * @param list1 - Input array A
      * @param list2 - input array B
@@ -31,10 +32,16 @@ class ProblemSolutions {
      */
 
     public boolean isSubset(int list1[], int list2[]) {
-
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
-
-        return false;
+        Set<Integer> setA = new HashSet<>();
+        for (int num : list1) {
+            setA.add(num);
+        }
+        for (int num : list2) {
+            if (!setA.contains(num)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -52,10 +59,14 @@ class ProblemSolutions {
      */
 
     public int findKthLargest(int[] array, int k) {
-
-        // ADD YOUR CODE HERE
-
-        return 0;
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int num : array) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        return minHeap.peek();
     }
 
 
@@ -73,10 +84,18 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
-
-        // ADD YOU CODE HERE
-
-        return null;
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int num : array1) {
+            minHeap.offer(num);
+        }
+        for (int num : array2) {
+            minHeap.offer(num);
+        }
+        int[] result = new int[array1.length + array2.length];
+        int index = 0;
+        while (!minHeap.isEmpty()) {
+            result[index++] = minHeap.poll();
+        }
+        return result;
     }
-
-}
+    }
